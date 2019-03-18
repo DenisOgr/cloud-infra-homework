@@ -5,6 +5,9 @@ Produces load on all available CPU cores
 from multiprocessing import Pool, Process
 from multiprocessing import cpu_count
 from time import sleep
+import os
+
+load_time = int(os.getenv('LOAD_TIME_SEC', 10))
 
 def f(x):
     while True:
@@ -19,10 +22,11 @@ def stop_processes(p:Process):
     p.terminate()
 
 if __name__ == '__main__':
+    print("I am going to load %s CPUs"%cpu_count())
     processes = [create_processes(x) for x in range(cpu_count())]
     [start_processes(x) for x in processes]
-    print("I will sleep....")
-    sleep(10)
+    print("I will working %s sec ...."%load_time)
+    sleep(load_time)
     [stop_processes(x) for x in processes]
     print("Finish!")
 
