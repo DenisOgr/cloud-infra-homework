@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cloud-infra-homework
+  labels:
+    app: load-processor
+spec:
+  containers:
+    - name: main-service
+      image: denys_porplenko/cloud_infra_home_work:0.1
+      env:
+        - name: LOAD_TIME_SEC
+          value: 15
