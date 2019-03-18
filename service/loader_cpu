@@ -1,0 +1,38 @@
+#!/usr/bin/env python
+"""
+Produces load on all available CPU cores
+"""
+from multiprocessing import Pool, Process
+from multiprocessing import cpu_count
+from time import sleep
+
+def f(x):
+    while True:
+        x*x
+def create_processes(x):
+    return Process(target=f, args=(x,))
+
+def start_processes(p:Process):
+    p.start()
+
+def stop_processes(p:Process):
+    p.terminate()
+
+if __name__ == '__main__':
+    processes = [create_processes(x) for x in range(cpu_count())]
+    [start_processes(x) for x in processes]
+    print("I will sleep....")
+    sleep(10)
+    [stop_processes(x) for x in processes]
+    print("Finish!")
+
+
+
+    # processes = cpu_count()
+    # print('-' * 20)
+    # print('Running load on CPU')
+    # print('Utilizing %d cores' % processes)
+    # print('-' * 20)
+    # pool = Pool(processes)
+    # pool.map(f, range(processes))
+
