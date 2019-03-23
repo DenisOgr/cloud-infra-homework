@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: service-node-port
+spec:
+  selector:
+    name: load-cpu-label
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000
+    nodePort: 30010
+    name: http
+ 

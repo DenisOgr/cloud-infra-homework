@@ -1,7 +1,11 @@
 FROM python:3.7
 
+COPY . /app
+WORKDIR /app
+EXPOSE 80
+#RUN pip install --upgrade pip
 
-COPY ./service /service
-WORKDIR /service
+RUN pip install -r requirements.txt
 
-CMD ["./loader_cpu"]
+ENTRYPOINT ["python"]
+CMD ["service/loader_cpu_http_server.py"]

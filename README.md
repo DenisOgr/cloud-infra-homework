@@ -22,17 +22,22 @@
 # Solution
 #### Build service (docker image):
 ```
-docker build . -t denys_porplenko/cloud_infra_home_work:0.1
+docker build . -t denisog/homework-load-cpu:0.2
 ```
 
 #### Run service:
 ```
-docker run --rm -it denys_porplenko/cloud_infra_home_work:0.1
+docker run  -d --rm -p 8080:5000 denisog/homework_load_cpu:0.2
 ```
 
-#### Using time to load:
-Default time 10 sec. You can change it using `LOAD_TIME_SEC` env variable.
+#API
+#### RUN loading:
+Default time 10 sec. You can change it using `/run/<number of sec>`.
 
 ```
-docker run --rm -e LOAD_TIME_SEC=15 -it denys_porplenko/cloud_infra_home_work:0.1
+curl 0.0.0.0:8080/run/5
+```
+#### STATUS service
+```
+curl 0.0.0.0:5000/status
 ```
