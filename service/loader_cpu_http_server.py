@@ -13,7 +13,7 @@ def hello():
 def run(secs=10):
     processes = [create_processes(x) for x in range(cpu_count())]
     [start_processes(x) for x in processes]
-
+    secs = int(secs)
     sleep(secs)
     [stop_processes(x) for x in processes]
     return "I loaded CPUs (number: %s) for %s secs" % (cpu_count(), secs)
