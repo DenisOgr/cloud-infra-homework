@@ -21,6 +21,7 @@ Makefile: ;              # skip prerequisite discovery
 .PHONY: create_cluster
 create_cluster: ## Create minicube claster and open dashboard
 	minikube start
+	minikube addons enable metrics-server
 	minikube dashboard
 
 .PHONY: destroy_cluster
