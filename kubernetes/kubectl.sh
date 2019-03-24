@@ -2,6 +2,8 @@
 ##Start
 minikube start
 minikube dashboard
+minikube stop
+minikube delete
 
 ##Deployment
 kubectl apply -f development.yml
@@ -13,13 +15,26 @@ kubectl get pods
 
 
 ##Services
-kubectl get services
-kubectl expose deployment load-cpu-dev --type=NodePort --port=5000
-
-##Balancer
+#kubectl expose deployment load-cpu-dev --type=NodePort --port=5000
 kubectl apply -f service.yml
-kubectl describe services service-node-port
-minikube service load-cpu-dev --url
-kubectl delete service load-cpu-dev
+kubectl get services
+minikube service service-node-port --url
+kubectl delete service service-node-port
 
-kubectl logs -f load-cpu-5958ccb5b8-rbn4j
+##Autoscaling CPU
+kubectl apply -f autoscale-cpu.yml
+kubectl get hpa
+kubectl describe hpa autoscaling-cpu-load
+kubectl delete hpa autoscaling-cpu-load
+
+
+##Autoscaling Memory
+kubectl apply -f autoscale-memory.yml
+kubectl get hpa
+kubectl describe hpa autoscaling-memory-load
+kubectl delete hpa autoscaling-memory-load
+
+##Metric server
+kubectl apply -f metrics-server/deploy/1.8+/
+minikube addons enable metrics-server
+kubectl top pods

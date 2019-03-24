@@ -19,6 +19,11 @@
 
 7. Реалізувати Memory scaling (імітувати задачу, що потребує багато пам'яті і вирішити проблему масштабування у випадку досягнення критичного розміру по використанню пам'яті) - до 5 - 15 балів
 
+You need to copy `.env.dist` file to `.env`:
+~~~bash
+cp .env.dist .env
+~~~
+
 # Solution
 #### Build service (docker image):
 ```

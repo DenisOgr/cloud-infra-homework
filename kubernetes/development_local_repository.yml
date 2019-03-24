@@ -15,7 +15,8 @@ spec:
       containers:
       - name: load-cpu-container-name
         image: denisog/homework-load-cpu:0.7
-        imagePullPolicy: Always
+        #Useing image only from local repository
+        imagePullPolicy: Never
         resources:
           requests:
             cpu: 100m
