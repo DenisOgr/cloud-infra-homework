@@ -31,7 +31,7 @@ destroy_cluster: ## Destroy minicube claster
 
 
 .PHONY: create
-up: ## Create deploment, services, pods, hpa`s
+create: ## Create deploment, services, pods, hpa`s
 	kubectl apply -f  "${CONFIG_DIR}/development.yml"
 	kubectl apply -f  "${CONFIG_DIR}/service.yml"
 	kubectl apply -f  "${CONFIG_DIR}/autoscale-cpu.yml"
