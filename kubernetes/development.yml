@@ -1,0 +1,35 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: load-cpu-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: load-cpu-label
+  template:
+    metadata:
+      labels:
+        name: load-cpu-label
+    spec:
+      containers:
+      - name: load-cpu-container-name
+        image: denisog/homework-load-cpu:0.7
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            memory: "100Mi"
+        livenessProbe:
+          httpGet: 
+            path: /status
+            port: 5000  
+          initialDelaySeconds: 60
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /status 
+            port: 5000
+          initialDelaySeconds: 60
+          periodSeconds: 5
